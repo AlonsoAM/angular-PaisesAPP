@@ -1,28 +1,48 @@
-<div *ngIf="!pais; else divPais" class="alert alert-info">Espere por favor...</div>
+<div *ngIf="!pais; else divPais" class="alert alert-info">
+  Espere por favor...
+</div>
 
 <ng-template #divPais>
-
   <div class="row">
-
     <div class="col-12">
-      <h1>País: <small> {{pais.name.common}} </small></h1>
+      <h1>
+        País: <small> {{ pais.name.common }} </small>
+      </h1>
     </div>
-
   </div>
 
   <div class="row">
     <div class="col-4">
       <h3>Bandera</h3>
-      <img [src]="pais.flags.png" [alt]="pais.flags.alt" class="img-thumbnail">
+      <img
+        [src]="pais.flags.png"
+        [alt]="pais.flags.alt"
+        class="img-thumbnail"
+      />
     </div>
     <div class="col">
       <h3>Información</h3>
       <ul class="list-group">
         <li class="list-group-item">
-          <strong>Población: </strong> {{pais.population | number}}
+          <strong>Población: </strong> {{ pais.population | number }}
         </li>
         <li class="list-group-item">
-          <strong>Capital: </strong> {{pais.capital}}
+          <strong>Capital: </strong> {{ pais.capital }}
+        </li>
+        <li class="list-group-item">
+          <strong>Región: </strong> {{ pais.region }}
+        </li>
+        <li class="list-group-item">
+          <strong>Subregión: </strong> {{ pais.subregion }}
+        </li>
+        <li class="list-group-item">
+          <strong>Idiomas Oficiales: </strong>
+          <br />
+          <ul>
+            <li *ngFor="let idioma of pais.languages | keyvalue">
+              {{ idioma.value }}
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -31,19 +51,18 @@
   <h3>Traducciones</h3>
   <div class="row">
     <div class="col">
-      <span *ngFor="let languaje of pais.translations | keyvalue" class="badge bg-primary ms-1">
-        {{languaje.value.official}}
+      <span
+        *ngFor="let languaje of pais.translations | keyvalue"
+        class="badge bg-primary ms-1"
+      >
+        {{ languaje.value.official }}
       </span>
     </div>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col">
-      <pre class="mt-5">
-    {{pais | json}}
-  </pre>
-
+      <pre class="mt-5">{{ pais | json }}</pre>
     </div>
-  </div>
-
+  </div> -->
 </ng-template>
